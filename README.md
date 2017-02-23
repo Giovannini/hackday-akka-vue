@@ -104,3 +104,60 @@ path("foo") {
   complete(Foo(5))
 }
 ```
+
+### Utiliser Akka-HTTP comme un serveur haut niveau
+Tout ce qu'on a vu jusque là permet surtout de gérer des requêtes HTTP basiques, sans envoi de fichiers ni possibilité de servir des  ressources serveur.
+Avant de commencer à essayer de mettre en place la partie front de notre application, nous devons donc voir comment faire pour servir des fichiers HTTP, JS et CSS.
+Il existe des directives permettant ce genre de manipulations, j'ai écrit cela:
+```
+get {
+  pathPrefix("(.+/?)*".r) { asset => // Match tout chemin 'aa/bb/cc' possible
+    encodeResponse { // optionally compresses the response with Gzip or Deflate if the client accepts compressed responses
+      getFromFile(s"$workingDirectory/client/$asset") // serve up static content
+    }
+  }
+}
+```
+Ce genre de directives permet de servir du contenu statique, comme une page HTML, du JS ou du CSS.
+
+
+## Vue.js
+Vue est un framework permettant de construire des interfaces utilisateur.
+
+### Installation
+```
+npm install vue --save
+```
+
+Pour une utilisation avec webpack, il va falloir rajouter des alias.
+Par défaut, les packages NPM n'exportent pas le build qu'il nous faut.
+```
+resolve: {
+  alias: {
+    vue: 'vue/dist/vue.js'
+  }
+}
+```
+
+### Utilisation
+Vue.js permet d'afficher de la donnée dans le DOM de manière déclarative:
+```
+<div id="app">
+  {{ message }}
+</div>
+```
+et
+```
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+```
+Ces deux bouts de code permettent de créer une application Vue.
+La donnée et le DOM sont liés avec ce code, ce qui rend tout réactif: si `app.message` est modifié, le texte affiché dans le DOM l'est aussi.
+
+#### Directives
+Une directive est un attribut HTML particulier, préfixée avec `v-` (pour indiquer qu'il s'agit d'un attribut fournit par Vue.js).
+Elles permettent d'appliquer un comportement spécial au DOM affiché.

@@ -8,7 +8,6 @@ class AssetsRoute() {
 
   def routes = get {
     pathPrefix("(.+/?)*".r) { asset =>
-      println(asset)
       encodeResponse {
         getFromFile(s"$workingDirectory/client/$asset")
       }

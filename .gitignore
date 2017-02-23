@@ -19,3 +19,4 @@ project/plugins/project/
 
 client/node_modules
 client/bundle.js
+client/yarn.lock
