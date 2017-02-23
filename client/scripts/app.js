@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { Message } from './components/Message';
 import { TodoList } from './components/TodoList';
+import { Speaker } from './components/Speaker';
 
 const appElement = '#app';
 
