@@ -18,7 +18,6 @@ class JsonRoutes()(implicit ec: ExecutionContext) {
 
   def routes = get {
     path(LongNumber) { id =>
-      println(id)
       val maybeItem: Future[Option[Item]] = itemRepository.fetchItem(id)
 
       onSuccess(maybeItem) {
