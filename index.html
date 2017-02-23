@@ -3,22 +3,20 @@
 <head>
   <title>Thomas GIOVANNINI</title>
 </head>
+<style>
+.striked {
+  text-decoration: line-through;
+}
+</style>
 <body>
 
   <h1>Yo!</h1>
 
   <div id="app">
-    <input v-model="tooltipMessage">
-    <br/>
-    <button v-on:click="newLetter">New letter</button>
-    <button v-on:click="reverseMessage">Reverse Message</button>
-    <button v-on:click="clearMessage">Clear Message</button>
-    <button v-on:click="hideMessage" v-if="seen">Hide Message</button>
-    <button v-on:click="hideMessage" v-if="!seen">Show Message</button>
 
-    <p v-bind:title="tooltipMessage" v-if="seen">
-      {{ message }}
-    </p>
+    <todo-list></todo-list>
+
+    <message></message>
   </div>
 
 </body>
