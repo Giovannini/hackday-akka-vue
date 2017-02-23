@@ -24,4 +24,5 @@ class IndexRoutes() {
     def routes = get {
       complete(response)
     }
+
 }

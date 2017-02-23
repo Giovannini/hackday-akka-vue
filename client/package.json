@@ -1,0 +1,33 @@
+{
+  "name": "hackday-akka-vue",
+  "version": "1.0.0",
+  "description": "Une petite application pour jouer avec Akka et VueJS",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config config/webpack.config.js",
+    "start": "webpack --progress --watch --config config/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Giovannini/hackday-akka-vue.git"
+  },
+  "keywords": [
+    "akka",
+    "vuejs"
+  ],
+  "author": "Thomas GIOVANNINI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Giovannini/hackday-akka-vue/issues"
+  },
+  "homepage": "https://github.com/Giovannini/hackday-akka-vue#readme",
+  "dependencies": {
+    "vue": "^2.1.10"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "webpack": "^2.2.1"
+  }
+}

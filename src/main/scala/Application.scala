@@ -7,6 +7,7 @@ import scala.io.StdIn
 import routes.HelloRoute
 import routes.JsonRoutes
 import routes.IndexRoutes
+import routes.AssetsRoute
 
 object Application {
   def main(args: Array[String]) {
@@ -21,6 +22,7 @@ object Application {
     val route =
       path("hello") { new HelloRoute().routes } ~
       pathPrefix("json") { new JsonRoutes().routes } ~
+      pathPrefix("assets") { new AssetsRoute().routes } ~
       new IndexRoutes().routes
 
     val bindingFuture = Http().bindAndHandle(route, "localhost", port)
