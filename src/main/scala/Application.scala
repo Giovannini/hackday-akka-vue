@@ -1,9 +1,11 @@
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import scala.io.StdIn
+
+import routes.HelloRoute
+import routes.JsonRoutes
 
 object Application {
   def main(args: Array[String]) {
@@ -16,11 +18,8 @@ object Application {
     val port: Int = 8080
 
     val route =
-      path("hello") {
-        get {
-          complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, "<h1>Let's go now!</h1>"))
-        }
-      }
+      path("hello") { new HelloRoute().routes } ~
+      pathPrefix("json") { new JsonRoutes().routes }
 
     val bindingFuture = Http().bindAndHandle(route, "localhost", port)
 
