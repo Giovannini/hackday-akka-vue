@@ -1,0 +1,5 @@
+darkColor: #5C4B51
+primaryColor: #8CBEB2
+backColor: #F2EBBF
+secondaryColor: #F3B562
+tertiaryColor: #F06060

@@ -2,12 +2,11 @@ package routes
 
 import akka.http.scaladsl.server.Directives._
 
-class AssetsRoute() {
-
-  val workingDirectory = System.getProperty("user.dir")
+class AssetsRoute(workingDirectory: String) {
 
   def routes = get {
-    pathPrefix("(.+/?)*".r) { asset =>
+    path(Remaining) { asset =>
+      println(asset)
       encodeResponse {
         getFromFile(s"$workingDirectory/client/$asset")
       }

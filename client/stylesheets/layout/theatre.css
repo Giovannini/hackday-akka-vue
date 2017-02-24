@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'OldGrowth'; /*a name to be used later*/
+    src: url('/assets/fonts/OldGrowth-Regular.otf'); /*URL to font*/
+}
+
+body {
+  background-color: #34363f;
+  font-family: 'OldGrowth';
+}
+
+h1 {
+  width: 100%;
+  padding: 30px;
+  padding-left: 60px;
+  background-color: #23252D;
+  color: white;
+}
+
+#theatre div.actor div.speaker {
+  background-color: #12141C;
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+
+#theatre div.play-scene {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+}
+
+#theatre button {
+  position: absolute;
+  bottom: 100px;
+  padding: 20px;
+  font-size: 20px;
+  border: none;
+  background-color: hsla(229, 10%, 70%, 1);
+  color: #12141C;
+  border-radius: 2px;
+  width: 50%;
+  right: 25%;
+}
