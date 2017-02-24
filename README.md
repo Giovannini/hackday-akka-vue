@@ -161,3 +161,36 @@ La donnée et le DOM sont liés avec ce code, ce qui rend tout réactif: si `app
 #### Directives
 Une directive est un attribut HTML particulier, préfixée avec `v-` (pour indiquer qu'il s'agit d'un attribut fournit par Vue.js).
 Elles permettent d'appliquer un comportement spécial au DOM affiché.
+
+
+## Akka Streams
+On s'est bien amusés, mais j'aimerai pouvoir transmettre des données de façon streamées à mon front.
+Pour se faire, il faut bien comprendre ce qu'il se passe derrière notre Akka-HTTP, et notamment qu'il se base sur une autre librairie d'Akka, [Stream](http://doc.akka.io/docs/akka/2.4/scala/stream/index.html).
+
+### Des concepts de base
+#### Stream
+Il s'agit d'un processus actif qui transforme et déplace de la donnée.
+#### Element
+Il s'agit de l'unité de process d'un stream.
+Toute opération d'un stream transforme et transfère des éléments d'un upstream à un downstream.
+On exprime la taille des buffets en nombre d'éléments indépendamment de la taille de ces éléments.
+#### Back-pressure
+Il s'agit d'une mesure de contrôle, une façon pour les consommateurs de donnée de notifier un producteur de leur disponibilité courante, pour qu'il puisse ainsi ajuster sa vitesse de production en fonction.
+Dans Akka Streams, la back-pressure est toujours comprise comme étant non-bloquante et asynchrone.
+#### Non bloquant
+Cela signifie qu'une opération ne gênera pas l'avancement du thread appelant, même si elle met du temps à se terminer.
+
+
+### Un quick start guide
+On retrouve trois grands types dans Akka Streams pour définir et lancer des streams:
+ * `Source`: il s'agit d'un objet qui émet un type de valeurs.
+ Cet objet est paramétré par deux types. Le premier est le type d'éléments émit par cette source, le second signal que lancer cette source produit une valeur auxiliaire.
+ Créer une source signifie avoir une description de ce que l'on veut lancer mais pas qu'elle est active.
+ Pour récupérer son contenu, il est nécessaire de la lancer, aucun calcul n'est fait auparavant.
+ * `Sink`: il s'agit d'un objet qui reçoit un type de valeurs.
+ C'est le genre d'objets que l'on utilise pour lancer une source et récupérer son contenu.
+ * `Flow`: il s'agit d'un élément qui a un type de valeur en entrée et un en sortie.
+ Il fait la connexion entre ces deux types et décrit les différentes étapes permettant de passer d'un type à l'autre.
+
+On parle aussi d'un quatrième type, le RunnableGraph.
+Il s'gait d'un `Flow` attaché à une `Source` et un `Sink` et qui est donc prêt à être lancé via `run()`.

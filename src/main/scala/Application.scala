@@ -8,6 +8,7 @@ import routes.HelloRoute
 import routes.JsonRoutes
 import routes.IndexRoutes
 import routes.AssetsRoute
+import routes.StreamingRoute
 
 object Application {
   def main(args: Array[String]) {
@@ -23,6 +24,7 @@ object Application {
       path("hello") { new HelloRoute().routes } ~
       pathPrefix("json") { new JsonRoutes().routes } ~
       pathPrefix("assets") { new AssetsRoute().routes } ~
+      pathPrefix("streaming") { new StreamingRoute().routes } ~
       new IndexRoutes().routes
 
     val bindingFuture = Http().bindAndHandle(route, "localhost", port)
